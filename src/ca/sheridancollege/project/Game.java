@@ -52,7 +52,25 @@ public abstract class Game {
     /**
      * When the game is over, use this method to declare and display a winning player.
      */
-    
+   
     public abstract void declareWinner();
-
+    int dealerScore = dealer.getHandValue();
+    for (Player player : getPlayers())
+    {
+        int plaerScore = player.getHandValue();
+        
+        if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE))
+        {
+            System.out.println(player.getName() + " won.");
+        }
+        else if (playerScore == dealerScore)
+        {
+            System.out.println(player.getName() + " has tied with the dealer.");
+        }
+        else 
+        {
+            System.out.println(player.getName() + " lost.");
+        }
+    }
+    
 }//end class
