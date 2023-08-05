@@ -15,9 +15,12 @@ import java.util.Scanner;
 
 public abstract class Game {
 
+    private final int WIN_SCORE =21;
+    private final int DEALER_HIT_THRESHOLD = 17;
     private final String name;//the title of the game
     private ArrayList<Player> players;// the players of the game
 
+    
     public Game(String name) {
         this.name = name;
         players = new ArrayList<>();
@@ -49,10 +52,24 @@ public abstract class Game {
      */
     public abstract void play();
 
+    
+    
     /**
-     * When the game is over, use this method to declare and display a winning player.
+     * To make it so that the dealer doesn't get any more cards after the dealer reaches 17
      */
-   
+    
+    private abstract void playDealerTurn()
+    {
+        while (dealer.getHandValue() < DEALER_HIT_THRESHOLD)
+        {
+            dealer.addCard(deck.dealCard());
+        }
+    }
+    
+    
+    /**
+     * When the game is over, use this method to declare and display a winner
+     */
     public abstract void declareWinner();
     int dealerScore = dealer.getHandValue();
     for (Player player : getPlayers())
