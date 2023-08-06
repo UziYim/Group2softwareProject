@@ -70,6 +70,37 @@ public abstract class Game {
         }
     }
     
+    private void playPlayerTurn(Player player, Scanner input)
+    {
+        while (!player.finish())
+        {
+            // To display the players current hand value
+            System.out.println("Your current hand value is: " + player.getHandValue()); 
+        }
+            // To check if the players hand value is greater than or equal to the WIN_SCORE variable
+            if (player.getHandValue() >= WIN_SCORE)
+            {
+                player.finish(true);
+                break;
+            }
+            
+            // Program will ask the player if they want to hit or stand
+            System.out.print("Would you like to hit or stand? (H/S): ");
+            String choice = input.next();
+            if (choice.equalsIgnoreCase("H"))
+            {
+                player.addCard(deck.dealCard());
+            }
+            else if (choice.equalsIgnoreCase("S"));
+            {
+                player.finish(true);
+            }
+            
+    }
+        
+    
+    
+    
     /**
      * To make it so that the dealer doesn't get any more cards after the dealer reaches 17.
      */
