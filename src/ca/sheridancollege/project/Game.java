@@ -17,8 +17,9 @@ public abstract class Game {
 
     private final int WIN_SCORE =21;
     private final int DEALER_HIT_THRESHOLD = 17;
+    private final int listofPlayers;
     private final String name;//the title of the game
-    private ArrayList<Player> players;// the players of the game
+    private ArrayList<Player> listofPlayers;// the players of the game
 
     
     public Game(String name) {
@@ -47,15 +48,30 @@ public abstract class Game {
         this.players = players;
     }
 
-    /**
-     * Play the game. This might be one method or many method calls depending on your game.
-     */
-    public abstract void play();
+ 
 
     
+    //array that asks the user to input how many people are going to play the game.
+    public void play()
+    {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Welcome to our blackjack game");
+        
+        while (true)
+        {
+            System.out.println("How many players are playing?");
+            int numPlayers = input.nextInt();
+            for (int i = 0; i < numPlayers; i++)
+            {
+                Player player = new Player("Player " + i);
+                listofPlayers.add(player);
+            }
+        }
+    }
     
     /**
-     * To make it so that the dealer doesn't get any more cards after the dealer reaches 17
+     * To make it so that the dealer doesn't get any more cards after the dealer reaches 17.
      */
     
     private abstract void playDealerTurn()
@@ -68,13 +84,13 @@ public abstract class Game {
     
     
     /**
-     * When the game is over, use this method to declare and display a winner
+     * When the game is over, use this method to declare and display a winner.
      */
     public abstract void declareWinner();
     int dealerScore = dealer.getHandValue();
     for (Player player : getPlayers())
     {
-        int plaerScore = player.getHandValue();
+        int playerScore = player.getHandValue();
         
         if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE))
         {
@@ -90,4 +106,5 @@ public abstract class Game {
         }
     }
     
-}//end class
+}
+//end class
