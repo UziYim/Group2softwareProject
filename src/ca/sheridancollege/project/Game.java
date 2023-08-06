@@ -1,7 +1,7 @@
 /**
  * SYST 17796 Project Base code.
  * Group 2
- * @authors Thomas Chau
+ * @author Thomas Chau
  */
 package ca.sheridancollege.project;
 
@@ -19,12 +19,14 @@ public abstract class Game {
     private final int DEALER_HIT_THRESHOLD = 17;
     private final int listofPlayers;
     private final String name;//the title of the game
-    private ArrayList<Player> listofPlayers;// the players of the game
-
+    private ArrayList<Player> listOfPlayers; // the players of the game
+    private Player player;
+    private Deck deck;
     
     public Game(String name) {
         this.name = name;
-        players = new ArrayList<>();
+        listOfPlayers = new ArrayList<>();
+        deck = new Deck();
     }
 
     /**
@@ -38,20 +40,17 @@ public abstract class Game {
      * @return the players of this game
      */
     public ArrayList<Player> getPlayers() {
-        return players;
+        return listOfPlayers;
     }
 
-    /**
-     * @param players the players of this game
-     */
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
 
  
 
     
-    //array that asks the user to input how many people are going to play the game.
+    /**
+     * Method to start the game, will ask how the 
+     * users how many players are going to play
+     */
     public void play()
     {
         Scanner input = new Scanner(System.in);
@@ -65,7 +64,7 @@ public abstract class Game {
             for (int i = 0; i < numPlayers; i++)
             {
                 Player player = new Player("Player " + i);
-                listofPlayers.add(player);
+                listOfPlayers.add(player);
             }
         }
     }
@@ -99,41 +98,48 @@ public abstract class Game {
     }
         
     
-    
-    
     /**
      * To make it so that the dealer doesn't get any more cards after the dealer reaches 17.
      */
     
-    private abstract void playDealerTurn()
+    private void playDealerTurn()
     {
+        Player dealer = new Player();
+        dealer.addCard(deck.dealCard());
+        
         while (dealer.getHandValue() < DEALER_HIT_THRESHOLD)
         {
             dealer.addCard(deck.dealCard());
         }
+        listOfPlayers.add(dealer);
     }
     
     
     /**
      * When the game is over, use this method to declare and display a winner.
      */
-    public abstract void declareWinner();
-    int dealerScore = dealer.getHandValue();
-    for (Player player : getPlayers())
+    public void declareWinner();
+        int dealerScore = listOfPlayers.get(listOfPlayers.size() -1).getHandValue();
+    
+    for (Player player : listOfPlayers)
     {
         int playerScore = player.getHandValue();
         
-        if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE))
+        if (player.isBust())
         {
-            System.out.println(player.getName() + " won.");
+            System.out.println("Player " + listOfPlayers.indexOf(player) + 1 + " busted and lost.");
+        }
+        else if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE))
+        {
+            System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + " wins.");
         }
         else if (playerScore == dealerScore)
         {
-            System.out.println(player.getName() + " has tied with the dealer.");
+            System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + " tied with the dealer.");
         }
-        else 
+        else
         {
-            System.out.println(player.getName() + " lost.");
+            System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + " lost.");
         }
     }
     
