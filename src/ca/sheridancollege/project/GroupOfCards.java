@@ -5,6 +5,7 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -15,14 +16,27 @@ import java.util.Collections;
  * @author dancye
  * @author Paul Bonenfant Jan 2020
  */
-public class GroupOfCards {
+public class GroupOfCards extends Card{
 
     //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
+    protected ArrayList<Card> cards = new ArrayList<Card>();
     private int size;//the size of the grouping
-
     public GroupOfCards(int size) {
-        this.size = size;
+        Random random = new Random();
+        int numberlimit = Card.Number.values().length;
+        int suitlimit = Card.Suit.values().length;
+        
+        for(int i=0; i < size; i++){
+            Card card = new Card(){
+                @Override
+                public String toString(){
+                    return this.getNumber() + " of " + this.getSuit();
+            }
+            };
+            card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
+            card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
+            cards.add(card);
+        }
     }
 
     /**
@@ -51,5 +65,15 @@ public class GroupOfCards {
     public void setSize(int size) {
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        String list = "";
+        
+        return list + cards;
+    }
+    
+    
+   
 
 }//end class

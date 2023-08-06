@@ -13,7 +13,41 @@ package ca.sheridancollege.project;
  */
 public abstract class Card {
     //default modifier for child classes
+    private Number number;
+    private Suit suit;
 
+    public enum Suit{HEARTS, DIAMONDS, CLUBS, SPADES};
+    
+    public enum Number{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, JACK, QUEEN, KING, JOKER};
+
+    
+    public Card(){
+    
+    }
+    public Card(Number number, Suit suit){
+        this.number = number;
+        this.suit = suit;
+    }
+    
+    public Number getNumber() {
+        return number;
+    }
+
+    public void setNumber(Number number) {
+        this.number = number;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+    
+    
+    
+    
     /**
      * Students should implement this method for their specific children classes
      *
