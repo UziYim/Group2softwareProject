@@ -46,6 +46,10 @@ public class GroupOfCards extends Card{
     public void removeCard(Card e){
         cards.remove(e);
     }
+    //Overloaded to work for Game 
+    public void removeCard(int e){
+        cards.remove(e);
+    }
     
     public void addCard(){
         Random random = new Random();
@@ -60,6 +64,13 @@ public class GroupOfCards extends Card{
             card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
             card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
             cards.add(card);
+    }
+    
+    //Overloading AddCard to work with Game
+    public void addCard(Player p)
+    {
+     p.hand.add(deck.get(0)); 
+     deck.removeCard(0);   
     }
     
     // Samantha's Method - Reminder for later, change AddCard. 
