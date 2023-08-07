@@ -87,7 +87,7 @@ public abstract class Game {
             for (int i = 0; i < 2; i++) {
                 for (Player player : listOfPlayers) {
                     //Takes the top card of the deck and deals it to the players.
-                    deck.dealCards(player); 
+                    deck.addCard(player); 
                 }
             }
 
@@ -115,8 +115,6 @@ public abstract class Game {
             System.out.print("Would you like to hit or stand? (H/S): ");
             String choice = input.next();
             if (choice.equalsIgnoreCase("H")) {
-                //Will be using the method in hit to do this. 
-                //player.addCard(deck.dealCard());
                 player.hit(); 
             } else if (choice.equalsIgnoreCase("S"));
             {
