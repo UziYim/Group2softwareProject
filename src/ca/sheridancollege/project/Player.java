@@ -14,8 +14,8 @@ package ca.sheridancollege.project;
 public abstract class Player {
 
     private String name; //the unique name for this player
-    private Hand hand; 
-    private boolean finish;
+    protected Hand hand; 
+    protected boolean finish;
     //private int hand_Value; 
     //private int value; 
     /**
