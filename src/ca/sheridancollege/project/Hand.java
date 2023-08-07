@@ -5,11 +5,12 @@ package ca.sheridancollege.project;
  * This class +++ Insert class description here +++
  *
  * @author Joshua Mahadeo
+ * @author Samantha Lum
  */
+import ca.sheridancollege.project.Card.Number;
 public class Hand {
     private GroupOfCards current_hand;
-    private int size;
-    private int value;
+    private int size; //size of the current hand
     
     public Hand(int size){
         GroupOfCards current_Hand = new GroupOfCards(size);
@@ -32,10 +33,6 @@ public class Hand {
         current_hand.removeCard(e);
         this.size-=1;
     }
-    public void remove(Card e){
-        current_hand.removeCard(e);
-        this.size-=1;
-    }
     
     public int getSize(){
        return this.size;
@@ -47,12 +44,13 @@ public class Hand {
         int position = 1; 
         int hold = 0; 
         //Make edits for this later, need to lookup how to iterate through a enum again
-       for(int i =0; i = size; i++)
+       for(int i =0; i < size; i++)
            {
-        for(Numbers n: Number.values())
+        for(Number n: Number.values())
             {
-                if(current_hand.get(i).getNumber() == n.value)
+                if(current_hand.cards.get(i).getNumber() == n)
                 {
+                    
                     hold+=position; 
                 }
                 if(position <10 )
@@ -62,7 +60,7 @@ public class Hand {
             }
                position =1; 
            }
-        return value; 
+        return hold; 
     }
     
     @Override

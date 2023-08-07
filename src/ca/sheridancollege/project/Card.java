@@ -13,12 +13,12 @@ package ca.sheridancollege.project;
  */
 public abstract class Card {
     //default modifier for child classes
-    private Number number;
-    private Suit suit;
+    protected Number number;
+    protected Suit suit;
 
     public enum Suit{HEARTS, DIAMONDS, CLUBS, SPADES};
     
-    public enum Number{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, JACK, QUEEN, KING};
+    public enum Number{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING};
 
     
     public Card(){

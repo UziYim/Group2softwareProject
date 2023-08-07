@@ -2,6 +2,7 @@
  * SYST 17796 Project Base code.
  * Students can modify and extend to implement their game.
  * Add your name as an author and the date!
+ * Joshua Mahadeo 08/07/2023
  * Samantha Lum 08/07/2023
  */
 package ca.sheridancollege.project;
@@ -23,7 +24,7 @@ public class GroupOfCards extends Card{
     protected ArrayList<Card> cards = new ArrayList<Card>();
     private int size;//the size of the grouping
 
-    
+    //constructor that makes a list of random cards with the size given by the user
     public GroupOfCards(int size) {
         Random random = new Random();
         int numberlimit = Card.Number.values().length;
@@ -42,28 +43,29 @@ public class GroupOfCards extends Card{
             
         }
     }
-    
-    public void removeCard(Card e){
-        cards.remove(e);
-    }
-    //Overloaded to work for Game 
+ 
+    //removes a card from the arraylist at the given index
     public void removeCard(int e){
         cards.remove(e);
     }
-    
+    // adds a random card to the arraylist
     public void addCard(){
         Random random = new Random();
         int numberlimit = Card.Number.values().length;
         int suitlimit = Card.Suit.values().length;
-    Card card = new Card(){
+        Card card = new Card(){
                 @Override
                 public String toString(){
                     return this.getNumber() + " of " + this.getSuit();
             }
             };
-            card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
-            card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
-            cards.add(card);
+        card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
+        card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
+        cards.add(card);
+    }
+    //adds a specified card to the arraylist
+    public void addCard(Card e){
+        cards.add(e);
     }
     
     //Overloading AddCard to work with Game
@@ -71,7 +73,7 @@ public class GroupOfCards extends Card{
     {
      p.hand.add(deck.get(0)); 
      deck.removeCard(0);   
-    }
+    } 
     
     // Samantha's Method - Reminder for later, change AddCard. 
 /* 
@@ -90,7 +92,8 @@ public class GroupOfCards extends Card{
     public ArrayList<Card> getCards() {
         return cards;
     }
-
+    
+    //shuffles the cards
     public void shuffle() {
         Collections.shuffle(cards);
     }
@@ -108,15 +111,14 @@ public class GroupOfCards extends Card{
     public void setSize(int size) {
         this.size = size;
     }
-
+    
+    //returns a String that includes all of the cards in the arraylist
     @Override
     public String toString() {
         String list = "";
         
         return list + cards;
     }
-    
-    
    
 
 }//end class

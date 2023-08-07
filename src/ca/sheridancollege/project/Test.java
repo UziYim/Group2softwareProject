@@ -18,7 +18,7 @@ public class Test {
         System.out.println(group.getCards());
         //System.out.println(group.toString());
         System.out.println(hand.toString());
-        
+        System.out.println(hand.getHandValue());
         
     }
      
