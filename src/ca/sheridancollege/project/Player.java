@@ -54,7 +54,7 @@ public abstract class Player {
     
     public void hit()
     {
-        hand.Add(); 
+        hand.add(); 
     }
     public void stand()
     {
