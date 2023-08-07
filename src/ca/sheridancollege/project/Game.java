@@ -32,18 +32,6 @@ public abstract class Game {
         listOfPlayers = new ArrayList<>();
         deck = new GroupOfCards(52);
     }
-    /* edit Sam, this is not needed as Player comes with getName
-    /**
-     * @return the name
-    
-    
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @return the players of this game
-     */
 
     public ArrayList<Player> getPlayers() {
         return listOfPlayers;
@@ -69,7 +57,7 @@ public abstract class Game {
                     System.out.println("Error, not a valid input. Will default to 1 player."); 
                     numPlayers = 1; 
                 }
-
+            //For easy access to remove dealer. 
             listOfplayers.add(dealer); 
             
             for (int i = 0; i < numPlayers; i++) {
@@ -79,15 +67,14 @@ public abstract class Game {
             
             deck.shuffle();
             
-            //Edit Moving this into another method.
-            dealCards(); 
+            //To remove dealer from the player turns. 
+            dealer = listOfPlayers.get(0); 
+            listofPlayers.remove(0); 
             
             // To let each player play their turn
             for (Player player : listOfPlayers) {
                 playPlayerTurn(player, input);
             }
-            dealer = listOfPlayers.get(0); 
-            listofPlayers.remove(0); 
             // Playing the dealers turn
             playDealerTurn();
 
