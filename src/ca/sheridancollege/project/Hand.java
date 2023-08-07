@@ -17,12 +17,22 @@ public class Hand {
         this.size = size;
     }
     
-    public void Add(){
+
+    public void add(){
         current_hand.addCard();
         this.size+=1;
     }
     
-    public void Remove(Card e){
+    public void add(Card e){
+        current_hand.addCard(e);
+        this.size+=1;
+    }
+    
+    public void remove(int e){
+        current_hand.removeCard(e);
+        this.size-=1;
+    }
+    public void remove(Card e){
         current_hand.removeCard(e);
         this.size-=1;
     }
@@ -31,6 +41,8 @@ public class Hand {
        return this.size;
        
     }
+
+    
     @Override
     public String toString(){
     return current_hand.toString();
