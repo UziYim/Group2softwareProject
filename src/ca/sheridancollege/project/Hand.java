@@ -42,6 +42,28 @@ public class Hand {
        
     }
 
+    public int getHandValue()
+    {
+        int position = 1; 
+        int hold = 0; 
+        //Make edits for this later, need to lookup how to iterate through a enum again
+       for(int i =0; i = size; i++)
+           {
+        for(Numbers n: Number.values())
+            {
+                if(current_hand.get(i).getNumber() == n.value)
+                {
+                    hold+=position; 
+                }
+                if(position <10 )
+                {
+                    position++; 
+                }
+            }
+               position =1; 
+           }
+        return value; 
+    }
     
     @Override
     public String toString(){
