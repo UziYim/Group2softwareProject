@@ -36,7 +36,27 @@ public class GroupOfCards extends Card{
             card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
             card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
             cards.add(card);
+            
         }
+    }
+    
+    public void removeCard(Card e){
+        cards.remove(e);
+    }
+    
+    public void addCard(){
+        Random random = new Random();
+        int numberlimit = Card.Number.values().length;
+        int suitlimit = Card.Suit.values().length;
+    Card card = new Card(){
+                @Override
+                public String toString(){
+                    return this.getNumber() + " of " + this.getSuit();
+            }
+            };
+            card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
+            card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
+            cards.add(card);
     }
 
     /**

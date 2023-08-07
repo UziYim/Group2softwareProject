@@ -18,7 +18,7 @@ public abstract class Card {
 
     public enum Suit{HEARTS, DIAMONDS, CLUBS, SPADES};
     
-    public enum Number{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, JACK, QUEEN, KING, JOKER};
+    public enum Number{ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, JACK, QUEEN, KING};
 
     
     public Card(){

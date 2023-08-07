@@ -16,7 +16,7 @@ public class Test {
         Hand hand = new Hand(2);
         
         System.out.println(group.getCards());
-        System.out.println(group.toString());
+        //System.out.println(group.toString());
         System.out.println(hand.toString());
         
         

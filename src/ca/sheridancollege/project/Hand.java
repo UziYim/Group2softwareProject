@@ -1,7 +1,6 @@
 
 
 package ca.sheridancollege.project;
-
 /**
  * This class +++ Insert class description here +++
  *
@@ -10,6 +9,7 @@ package ca.sheridancollege.project;
 public class Hand {
     private GroupOfCards current_hand;
     private int size;
+    private int value;
     
     public Hand(int size){
         GroupOfCards current_Hand = new GroupOfCards(size);
@@ -18,12 +18,12 @@ public class Hand {
     }
     
     public void Add(){
-        
+        current_hand.addCard();
         this.size+=1;
     }
     
-    public void Remove(){
-    
+    public void Remove(Card e){
+        current_hand.removeCard(e);
         this.size-=1;
     }
     
