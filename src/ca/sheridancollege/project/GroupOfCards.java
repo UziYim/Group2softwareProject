@@ -2,6 +2,7 @@
  * SYST 17796 Project Base code.
  * Students can modify and extend to implement their game.
  * Add your name as an author and the date!
+ * Samantha Lum 08/07/2023
  */
 package ca.sheridancollege.project;
 
@@ -21,6 +22,8 @@ public class GroupOfCards extends Card{
     //The group of cards, stored in an ArrayList
     protected ArrayList<Card> cards = new ArrayList<Card>();
     private int size;//the size of the grouping
+
+    
     public GroupOfCards(int size) {
         Random random = new Random();
         int numberlimit = Card.Number.values().length;
@@ -58,7 +61,16 @@ public class GroupOfCards extends Card{
             card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
             cards.add(card);
     }
-
+    
+    // Samantha's Method - Reminder for later, change AddCard. 
+/* 
+        public void dealCards(Player p)
+            {
+                    p.hand.addCard(deck.get(0));
+                    deck.remove(0); 
+            }
+    
+*/
     /**
      * A method that will get the group of cards as an ArrayList
      *
