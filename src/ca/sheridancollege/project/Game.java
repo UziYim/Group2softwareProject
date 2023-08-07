@@ -8,6 +8,7 @@ package ca.sheridancollege.project;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 
 /**
  * The class that models the game.
@@ -22,17 +23,20 @@ public abstract class Game {
     private final String name;//the title of the game
     private ArrayList<Player> listOfPlayers; // the players of the game
     private Player player;
-    private Deck deck;
+    private Player dealer = new Player("Dealer"); 
+    //Edit from Sam, Deck is a groupofcards and changing it to protected so other classes can use it. 
+    protected GroupOfCards deck;
 
     public Game(String name) {
         this.name = name;
         listOfPlayers = new ArrayList<>();
-        deck = new Deck();
+        deck = new GroupOfCards(52);
     }
-
+    /* edit Sam, this is not needed as Player comes with getName
     /**
      * @return the name
-     */
+    
+    
     public String getName() {
         return name;
     }
@@ -40,6 +44,7 @@ public abstract class Game {
     /**
      * @return the players of this game
      */
+
     public ArrayList<Player> getPlayers() {
         return listOfPlayers;
     }
@@ -54,55 +59,81 @@ public abstract class Game {
 
         while (true) {
             System.out.println("How many players are playing?");
+            
+            //Edit by Sam doing a try and catch thing here incase the user enters wrong input
+            try {
             int numPlayers = input.nextInt();
+            }
+            catch(Expection e)
+                {
+                    System.out.println("Error, not a valid input. Will default to 1 player."); 
+                    numPlayers = 1; 
+                }
+
+            listOfplayers.add(dealer); 
+            
             for (int i = 0; i < numPlayers; i++) {
                 Player player = new Player("Player " + (i + 1));
                 listOfPlayers.add(player);
             }
+            
             deck.shuffle();
-
-            // To deal two cards to each player and to the dealer
-            for (int i = 0; i < 2; i++) {
-                for (Player player : listOfPlayers) {
-                    player.addCard(deck.dealCard());
-                }
-            }
-
+            
+            //Edit Moving this into another method.
+            dealCards(); 
+            
             // To let each player play their turn
             for (Player player : listOfPlayers) {
                 playPlayerTurn(player, input);
             }
-
+            dealer = listOfPlayers.get(0); 
+            listofPlayers.remove(0); 
             // Playing the dealers turn
             playDealerTurn();
 
             // Declare winner
             declareWinner();
         }
-    
-    
-    
-
-    private void playPlayerTurn(Player player, Scanner input) {
-        while (!player.finish() && !player.Bust()) {
-
-            // To display the players current hand value
-            System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + "your current hand value is: " + player.getHandValue());
-
-            // To check if the players hand value is greater than or equal to the WIN_SCORE variable
-            if (player.getHandValue() >= WIN_SCORE) {
-                player.finish(true);
-                break;
+    // To deal two cards to each player, Deck must be shuffled. 
+        private void dealHands()
+        {
+            for (int i = 0; i < 2; i++) {
+                for (Player player : listOfPlayers) {
+                    //Takes the top card of the deck and deals it to the players.
+                    deck.dealCards(player); 
+                }
             }
 
+        }
+
+
+    
+    private void playPlayerTurn(Player player, Scanner input) {
+        // Edit Changing the condition to only check if player is finished. 
+        while (!player.finish()) {
+
+            // To display the players current hand value
+            System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + "your current hand value is: " + player.hand.getHandValue());
+
+            
+            //Will automatically stand the player. 
+            // To check if the players hand value is greater than or equal to the WIN_SCORE variable
+            if (player.hand.getHandValue() >= WIN_SCORE) {
+                player.stand();
+                break;
+                }
+                
+            */
             // Program will ask the player if they want to hit or stand according to their hand value
             System.out.print("Would you like to hit or stand? (H/S): ");
             String choice = input.next();
             if (choice.equalsIgnoreCase("H")) {
-                player.addCard(deck.dealCard());
+                //Will be using the method in hit to do this. 
+                //player.addCard(deck.dealCard());
+                player.hit(); 
             } else if (choice.equalsIgnoreCase("S"));
             {
-                player.finish(true);
+                player.stand(); 
             }
         }
     }
@@ -111,13 +142,10 @@ public abstract class Game {
      * To make it so that the dealer doesn't get any more cards after the dealer reaches 17.
      */
     private void playDealerTurn() {
-        Player dealer = new Player();
-        dealer.addCard(deck.dealCard());
-
-        while (dealer.getHandValue() < DEALER_HIT_THRESHOLD) {
-            dealer.addCard(deck.dealCard());
+        while (dealer.hand.getHandValue() < DEALER_HIT_THRESHOLD) {
+            dealer.hit(); 
         }
-        listOfPlayers.add(dealer);
+        dealer.stand(); 
     }
 
     /**
@@ -126,12 +154,12 @@ public abstract class Game {
     public void declareWinner();
 
     {
-        int dealerScore = listOfPlayers.get(listOfPlayers.size() - 1).getHandValue();
-
+        int dealerScore = dealer.hand.getHandValue(); 
+        
         for (Player player : listOfPlayers) {
             int playerScore = player.getHandValue();
 
-            if (player.Bust()) {
+            if (player.getHandValue() > WIN_SCORE) {
                 System.out.println("Player " + listOfPlayers.indexOf(player) + 1 + " busted and lost.");
             } else if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE)) {
                 System.out.println("Player " + (listOfPlayers.indexOf(player) + 1) + " wins.");
