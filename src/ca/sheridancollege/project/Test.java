@@ -2,6 +2,9 @@
 
 package ca.sheridancollege.project;
 
+import static ca.sheridancollege.project.Card.Number.TWO;
+import static ca.sheridancollege.project.Card.Suit.HEARTS;
+
 /**
  * This class +++ Insert class description here +++
  *
@@ -19,6 +22,18 @@ public class Test {
         //System.out.println(group.toString());
         System.out.println(hand.toString());
         System.out.println(hand.getHandValue());
+        System.out.println(group.getNumber());
+        Card card;
+        card = new Card (TWO, HEARTS) {
+            @Override
+            public String toString() {
+                return "";
+            }
+        };
+        System.out.println(card.getNumber());
+    
+    }
+        
         
     }
      

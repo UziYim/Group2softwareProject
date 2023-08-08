@@ -69,10 +69,11 @@ public class GroupOfCards extends Card{
     }
     
     //Overloading AddCard to work with Game
-    public void addCard(Player p)
+    public void addCard(Player p, Game g)
     {
-     p.hand.add(deck.get(0)); 
-     deck.removeCard(0);   
+        
+     p.hand.add(g.deck.get()); 
+     g.deck.removeCard(0);   
     } 
     
     // Samantha's Method - Reminder for later, change AddCard. 
