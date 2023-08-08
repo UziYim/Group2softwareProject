@@ -46,26 +46,24 @@ public abstract class Game {
         boolean checkplyr = true;
         
         System.out.println("Welcome to our blackjack game");
-        
-         do{
-            System.out.println("How many players are playing?");
+        int numPlayers;
+        do{
+            System.out.print("How many players are playing? ");
+            numPlayers = input.nextInt();
             
             //Edit by Sam doing a try and catch thing here incase the user enters wrong input
-            try {
-                int numPlayers = input.nextInt();
-                if(numPlayers >= 1){
-                    checkplyr=false;
-                }
-            }
-            catch(Exception e)
+            //try 
+                if(numPlayers >=1)
                 {
-                    System.out.println("Error, not a valid input. Will default to 1 player."); 
-                    numPlayers = 1; 
-                    checkplyr = false;
-                    
+
+                checkplyr = false; 
                 }
+                else 
+                {
+                System.out.println("Error: Number of Players is less than 1.");
+                }
+
         } while(checkplyr==true);
-        
         
             //For easy access to remove dealer. 
             listOfPlayers.add(dealer); 
@@ -147,13 +145,14 @@ public abstract class Game {
     /**
      * When the game is over, use this method to declare and display a winner.
      */
-    public void declareWinner()
+     public void declareWinner()
     {
         int dealerScore = dealer.hand.getHandValue(); 
+        System.out.println("Dealer's hand Values: " + dealerScore); 
         
         for (Player player : listOfPlayers) {
             int playerScore = player.hand.getHandValue();
-
+            System.out.println(player.getName()+"'s hand Values: " + playerScore); 
             if (player.hand.getHandValue() > WIN_SCORE) {
                 System.out.println("Player " + listOfPlayers.indexOf(player) + 1 + " busted and lost.");
             } else if (playerScore <= WIN_SCORE && (playerScore > dealerScore || dealerScore > WIN_SCORE)) {
