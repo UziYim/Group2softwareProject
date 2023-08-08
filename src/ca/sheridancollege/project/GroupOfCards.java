@@ -26,6 +26,7 @@ public class GroupOfCards extends Card{
 
     //constructor that makes a list of random cards with the size given by the user
     public GroupOfCards(int size) {
+        this.size = size;
         Random random = new Random();
         int numberlimit = Card.Number.values().length;
         int suitlimit = Card.Suit.values().length;
@@ -47,6 +48,7 @@ public class GroupOfCards extends Card{
     //removes a card from the arraylist at the given index
     public void removeCard(int e){
         cards.remove(e);
+        size-=1;
     }
     // adds a random card to the arraylist
     public void addCard(){
@@ -62,18 +64,20 @@ public class GroupOfCards extends Card{
         card.setNumber(Card.Number.values()[random.nextInt(numberlimit)]);
         card.setSuit(Card.Suit.values()[random.nextInt(suitlimit)]);
         cards.add(card);
+        size+=1;
     }
     //adds a specified card to the arraylist
     public void addCard(Card e){
         cards.add(e);
+        size+=1;
     }
     
     //Overloading AddCard to work with Game
-    public void addCard(Player p, Game g)
+    public void addCard(Player p, GroupOfCards deck)
     {
         
-     p.hand.add(g.deck.get()); 
-     g.deck.removeCard(0);   
+     p.hand.add(deck.cards.get(0)); 
+     deck.removeCard(0);   
     } 
     
     // Samantha's Method - Reminder for later, change AddCard. 

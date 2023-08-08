@@ -31,10 +31,13 @@ public class Test {
             }
         };
         System.out.println(card.getNumber());
+        
+        Game game = new Game("BlackJack") {};
+        game.play();
     
     }
         
         
     }
      
-}
+

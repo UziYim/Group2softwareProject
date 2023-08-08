@@ -19,13 +19,14 @@ public abstract class Game {
 
     private final int WIN_SCORE = 21;
     private final int DEALER_HIT_THRESHOLD = 17;
-    private final int listofPlayers;
     private final String name;//the title of the game
     private ArrayList<Player> listOfPlayers; // the players of the game
     private Player player;
     private Player dealer = new Player("Dealer") {}; 
     //Edit from Sam, Deck is a groupofcards and changing it to protected so other classes can use it. 
     protected GroupOfCards deck;
+    private int numPlayers;
+    private boolean game = true;
 
     public Game(String name) {
         this.name = name;
@@ -42,21 +43,30 @@ public abstract class Game {
      */
     public void play() {
         Scanner input = new Scanner(System.in);
-
+        boolean checkplyr = true;
+        
         System.out.println("Welcome to our blackjack game");
-
-        while (true) {
+        
+         do{
             System.out.println("How many players are playing?");
             
             //Edit by Sam doing a try and catch thing here incase the user enters wrong input
             try {
                 int numPlayers = input.nextInt();
+                if(numPlayers >= 1){
+                    checkplyr=false;
+                }
             }
             catch(Exception e)
                 {
                     System.out.println("Error, not a valid input. Will default to 1 player."); 
                     numPlayers = 1; 
+                    checkplyr = false;
+                    
                 }
+        } while(checkplyr==true);
+        
+        
             //For easy access to remove dealer. 
             listOfPlayers.add(dealer); 
             
@@ -80,7 +90,7 @@ public abstract class Game {
 
             // Declare winner
             declareWinner();
-        }
+        
     }
     // To deal two cards to each player, Deck must be shuffled. 
         private void dealHands()
@@ -88,7 +98,7 @@ public abstract class Game {
             for (int i = 0; i < 2; i++) {
                 for (Player player : listOfPlayers) {
                     //Takes the top card of the deck and deals it to the players.
-                    deck.addCard(player); 
+                    deck.addCard(player, this.deck); 
                 }
             }
 
